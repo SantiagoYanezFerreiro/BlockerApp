@@ -5,6 +5,16 @@ export default function WebsiteBlocker() {
   const [currentSite, setCurrentSite] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
+  useEffect(() => {
+    const storedBlockedSites =
+      JSON.parse(localStorage.getItem("blockedSites")) || [];
+    setBlockedSites(storedBlockedSites);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("blockedSites", JSON.stringify(blockedSites));
+  }, [blockedSites]);
+
   function handleInput(event) {
     setCurrentSite(event.target.value);
   }
@@ -36,33 +46,11 @@ export default function WebsiteBlocker() {
   }
 
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      const currentSite = window.location.hostname;
-      if (blockedSites.includes(currentSite)) {
-        event.preventDefault();
-        event.returnValue = "";
-        console.log(`blocked site detected ${currentSite}`);
-      }
-    };
-
-    const handleUnload = () => {
-      const currentSiteHostname = window.location.hostname;
-      if (blockedSites.some((site) => site.includes(currentSiteHostname))) {
-        window.location.href = "https://www.example.com/blocked";
-        console.log(`Blocked site detected: ${currentSiteHostname}`);
-      }
-    };
-
-    //Add Event Listeners
-    window.addEventListener("beforeUnload", handleBeforeUnload);
-    window.addEventListener("unload", handleUnload);
-
-    //Remove event listeners when component unmounts
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-      window.removeEventListener("unload", handleUnload);
-    };
+    const currentSiteHostname = window.location.hostname;
+    if (blockedSites.some((site) => site.includes(currentSiteHostname))) {
+      window.location.replace("https://www.google.com");
+      console.log(`Blocked site detected: ${currentSiteHostname}`);
+    }
   }, [blockedSites]);
 
   return (
