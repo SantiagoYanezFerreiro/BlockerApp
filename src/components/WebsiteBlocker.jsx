@@ -4,6 +4,7 @@ export default function WebsiteBlocker() {
   const [blockedSites, setBlockedSites] = useState([]);
   const [currentSite, setCurrentSite] = useState("");
   const [editIndex, setEditIndex] = useState(null);
+  const [fetchedData, setFetchedData] = useState(null);
 
   useEffect(() => {
     const storedBlockedSites =
@@ -14,6 +15,20 @@ export default function WebsiteBlocker() {
   useEffect(() => {
     localStorage.setItem("blockedSites", JSON.stringify(blockedSites));
   }, [blockedSites]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5173/api/data");
+        const data = await response.json();
+        setFetchedData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData(); // Fetch data when the component mounts
+  }, []); //
 
   function handleInput(event) {
     setCurrentSite(event.target.value);

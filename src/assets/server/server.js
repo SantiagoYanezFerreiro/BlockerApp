@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 5173;
 
 app.use(express.static("public"));
 
@@ -13,6 +13,11 @@ app.use((req, res, next) => {
   }
 
   next();
+});
+
+app.get("/api/data", (req, res) => {
+  const data = { message: "Hello from the server!" };
+  res.json(data);
 });
 
 app.listen(port, () => {
