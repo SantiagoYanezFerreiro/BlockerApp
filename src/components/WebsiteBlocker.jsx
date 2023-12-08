@@ -19,16 +19,21 @@ export default function WebsiteBlocker() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5173/api/data");
+        const response = await fetch("http://localhost:5174/api/data");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
         setFetchedData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
+        // Log the specific details of the error
+        console.error("Error details:", error.message);
       }
     };
 
-    fetchData(); // Fetch data when the component mounts
-  }, []); //
+    fetchData();
+  }, []);
 
   function handleInput(event) {
     setCurrentSite(event.target.value);
