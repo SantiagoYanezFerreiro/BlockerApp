@@ -16,8 +16,13 @@ app.use((req, res, next) => {
 });
 
 app.get("/api/data", (req, res) => {
-  const data = { message: "Hello from the server!" };
-  res.json(data);
+  try {
+    const data = { message: "Hello from the server!" };
+    res.json(data);
+  } catch (error) {
+    console.error("Error handling /api/data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 app.listen(port, () => {
