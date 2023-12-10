@@ -25,6 +25,7 @@ app.get("/api/data", (req, res) => {
     res.json(data);
   } catch (error) {
     console.error("Error handling /api/data:", error);
+    console.error("Error stack trace:", error.stack);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
