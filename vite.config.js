@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "http://localhost:5173", // Adjust the URL based on your Node.js server
+      "/api": "http://localhost:5174", // Adjust the URL to match your backend
     },
   },
 });

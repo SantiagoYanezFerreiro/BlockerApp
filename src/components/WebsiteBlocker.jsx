@@ -19,10 +19,16 @@ export default function WebsiteBlocker() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5174/api/data");
+        const response = await fetch("http://localhost:5174/api/data", {
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json();
         setFetchedData(data);
       } catch (error) {
@@ -33,7 +39,7 @@ export default function WebsiteBlocker() {
     };
 
     fetchData();
-  }, []);
+  }, [blockedSites]);
 
   function handleInput(event) {
     setCurrentSite(event.target.value);
