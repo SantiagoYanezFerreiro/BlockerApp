@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import AddBlockedSiteModal from "./AddBlockedSiteModal";
 
 export default function WebsiteBlocker() {
   const [blockedSites, setBlockedSites] = useState([]);
   const [currentSite, setCurrentSite] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [fetchedData, setFetchedData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const storedBlockedSites =
