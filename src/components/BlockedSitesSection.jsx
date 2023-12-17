@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 export default function BlockedSitesSection({ title, sites, onAddSite }) {
