@@ -7,13 +7,17 @@ export default function WebsiteBlocker() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function addSiteToSection(sectionIndex, site) {
-    const updatedSections = [...sections];
-    updatedSections[sectionIndex].sites.push(site);
-    setSections(updatedSections);
+    if (site) {
+      const updatedSections = [...sections];
+      updatedSections[sectionIndex].sites.push(site);
+      setSections(updatedSections);
+    }
   }
 
   function addSection(title) {
-    setSections([...sections, { title, sites: [] }]);
+    if (title.trim() !== "") {
+      setSections([...sections, { title, sites: [] }]);
+    }
   }
 
   const openModal = () => {
