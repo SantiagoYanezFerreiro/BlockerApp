@@ -39,7 +39,6 @@ export default function WebsiteBlocker() {
           onAddSite={(site) => addSiteToSection(index, site)}
         />
       ))}
-      <button onClick={openModal}>Add Section</button>
       <AddBlockedSiteModal
         isOpen={isModalOpen}
         onClose={closeModal}

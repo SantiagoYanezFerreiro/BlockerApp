@@ -18,10 +18,6 @@ export default function AddBlockedSiteModal({ isOpen, onClose, onAddSection }) {
   return (
     <div className={`modal ${isOpen ? "open" : ""}`}>
       <div className="modal-content">
-        <span className="close" onClick={() => onClose()}>
-          &times;
-        </span>
-        <h2>Add Section</h2>
         <input
           type="text"
           placeholder="Enter Section Title"
