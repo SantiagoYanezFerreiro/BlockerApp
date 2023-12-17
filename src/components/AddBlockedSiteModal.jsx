@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-export default function AddBlockedSiteModal({ isOpen, onClose, onAddSection }) {
-  const [currentTitle, setCurrentTitle] = useState("");
+export default function AddBlockedSiteModal({
+  isOpen,
+  onClose,
+  onAddOrEditSite,
+  currentEditSite,
+}) {
+  const [siteTitle, setSiteTitle] = useState("");
 
-  function handleInput(event) {
-    setCurrentTitle(event.target.value);
+  useEffect(() => {
+    setSiteTitle(currentEditSite || "");
+  }, [currentEditSite]);
+
+  function handleSubmit() {
+    if (siteTitle.trim() !== "") {
+      onAddOrEditSite(siteTitle);
+      setSiteTitle("");
+      onClose();
+    }
   }
 
-  function addSection() {
-    if (currentTitle.trim() != "") {
-      onAddSection(currentTitle);
-      setCurrentTitle("");
-    }
+  function handleInputChange(event) {
+    setSiteTitle(event.target.value);
   }
 
   return (
@@ -20,11 +30,13 @@ export default function AddBlockedSiteModal({ isOpen, onClose, onAddSection }) {
       <div className="modal-content">
         <input
           type="text"
-          placeholder="Enter Section Title"
-          value={currentTitle}
-          onChange={handleInput}
+          placeholder="Enter Site Name"
+          value={siteTitle}
+          onChange={handleInputChange}
         />
-        <button onClick={addSection}>Add Section</button>
+        <button onClick={handleSubmit}>
+          {currentEditSite ? "Edit Site" : "Add Site"}
+        </button>
       </div>
     </div>
   );
@@ -34,4 +46,6 @@ AddBlockedSiteModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onAddSection: PropTypes.func.isRequired,
+  onAddOrEditSite: PropTypes.func.isRequired,
+  currentEditSite: PropTypes.string,
 };

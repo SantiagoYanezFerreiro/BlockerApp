@@ -2,11 +2,9 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -34,4 +32,26 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+button {
+  margin-bottom: 15px;
+}
+
+li {
+  list-style: none;
+  text-align: center;
+}
+
+.blocker-sites-section {
+  text-align: center; /* Center-align the section content */
+}
+
+.blocker-sites-section ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+}
+
+.blocker-sites-section li {
+  margin-bottom: 20px;
 }

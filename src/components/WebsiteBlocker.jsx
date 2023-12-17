@@ -5,12 +5,20 @@ import AddBlockedSiteModal from "./AddBlockedSiteModal";
 export default function WebsiteBlocker() {
   const [sections, setSections] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+  const [currentEditSite, setCurrentEditSite] = useState(null);
+  const [currentEditSectionIndex, setCurrentEditSectionIndex] = useState(null);
 
-  function addSiteToSection(sectionIndex, site) {
-    if (site) {
-      const updatedSections = [...sections];
-      updatedSections[sectionIndex].sites.push(site);
+  function addSiteToSection(site) {
+    const updatedSections = [...sections];
+    if (site && currentEditSectionIndex !== null) {
+      if (editIndex !== null) {
+        updatedSections[currentEditSectionIndex].sites[editIndex] = site;
+      } else {
+        updatedSections[currentEditSectionIndex].sites.push(site);
+      }
       setSections(updatedSections);
+      resetModalAndEditState();
     }
   }
 
@@ -20,13 +28,25 @@ export default function WebsiteBlocker() {
     }
   }
 
-  const openModal = () => {
+  function openModalForEdit(sectionIndex, siteIndex) {
     setIsModalOpen(true);
-  };
+    setEditIndex(siteIndex);
+    setCurrentEditSite(sections[sectionIndex].sites[siteIndex]);
+    setCurrentEditSectionIndex(sectionIndex);
+  }
 
-  const closeModal = () => {
+  function resetModalAndEditState() {
     setIsModalOpen(false);
-  };
+    setEditIndex(null);
+    setCurrentEditSite(null);
+    setCurrentEditSectionIndex(null);
+  }
+
+  function deleteSite(sectionIndex, siteIndex) {
+    const updatedSections = [...sections];
+    updatedSections[sectionIndex].sites.splice(siteIndex, 1);
+    setSections(updatedSections);
+  }
 
   return (
     <div className="blocker-container">
@@ -36,13 +56,19 @@ export default function WebsiteBlocker() {
           key={index}
           title={section.title}
           sites={section.sites}
-          onAddSite={(site) => addSiteToSection(index, site)}
+          onAddSite={() => {
+            setCurrentEditSectionIndex(index);
+            setIsModalOpen(true);
+          }}
+          onEditSite={(siteIndex) => openModalForEdit(index, siteIndex)}
+          onDeleteSite={(siteIndex) => deleteSite(index, siteIndex)}
         />
       ))}
       <AddBlockedSiteModal
         isOpen={isModalOpen}
-        onClose={closeModal}
-        onAddSection={addSection}
+        onClose={resetModalAndEditState}
+        onAddorEditSite={addSiteToSection}
+        currentEditSite={currentEditSite}
       />
     </div>
   );
