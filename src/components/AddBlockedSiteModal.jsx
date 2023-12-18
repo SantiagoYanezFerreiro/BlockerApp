@@ -45,7 +45,6 @@ export default function AddBlockedSiteModal({
 AddBlockedSiteModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onAddSection: PropTypes.func.isRequired,
   onAddOrEditSite: PropTypes.func.isRequired,
   currentEditSite: PropTypes.string,
 };

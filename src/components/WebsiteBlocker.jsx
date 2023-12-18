@@ -22,6 +22,15 @@ export default function WebsiteBlocker() {
     }
   }
 
+  function openModalToAddNewSection() {
+    setIsAddingSection(true);
+    setIsModalOpen(true);
+    // Reset other states
+    setEditIndex(null);
+    setCurrentEditSite(null);
+    setCurrentEditSectionIndex(null);
+  }
+
   function addSection(title) {
     if (title.trim() !== "") {
       setSections([...sections, { title, sites: [] }]);
@@ -64,10 +73,12 @@ export default function WebsiteBlocker() {
           onDeleteSite={(siteIndex) => deleteSite(index, siteIndex)}
         />
       ))}
+      <button onClick={openModalToAddNewSection}>Add New Section</button>
+
       <AddBlockedSiteModal
         isOpen={isModalOpen}
         onClose={resetModalAndEditState}
-        onAddorEditSite={addSiteToSection}
+        onAddOrEditSite={addSiteToSection}
         currentEditSite={currentEditSite}
       />
     </div>
