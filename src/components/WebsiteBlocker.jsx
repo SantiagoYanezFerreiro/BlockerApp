@@ -11,6 +11,7 @@ export default function WebsiteBlocker() {
   const [currentEditSectionIndex, setCurrentEditSectionIndex] = useState(null);
 
   function addSiteToSection(site) {
+    console.log("functionc called");
     const updatedSections = [...sections];
     if (isAddingSection) {
       if (site.trim() !== "") {
@@ -22,6 +23,7 @@ export default function WebsiteBlocker() {
       } else {
         updatedSections[currentEditSectionIndex].sites.push(site);
       }
+      console.log(updatedSections);
       setSections(updatedSections);
       resetModalAndEditState();
     }

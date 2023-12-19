@@ -17,6 +17,7 @@ export default function AddBlockedSiteModal({
   function handleSubmit() {
     if (inputValue.trim() !== "") {
       onAddOrEditSite(inputValue);
+      console.log(inputValue);
       setInputValue("");
       onClose();
     }
