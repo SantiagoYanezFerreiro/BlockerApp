@@ -11,23 +11,18 @@ export default function WebsiteBlocker() {
   const [currentEditSectionIndex, setCurrentEditSectionIndex] = useState(null);
 
   function addSiteToSection(site) {
+    const updatedSections = [...sections];
     if (isAddingSection) {
-      addSection(site);
+      if (site.trim() !== "") {
+        setSections([...sections, { title: site, sites: [] }]);
+      }
     } else if (site && currentEditSectionIndex !== null) {
-      const updatedSections = [...sections];
       if (editIndex !== null) {
         updatedSections[currentEditSectionIndex].sites[editIndex] = site;
       } else {
         updatedSections[currentEditSectionIndex].sites.push(site);
       }
       setSections(updatedSections);
-      resetModalAndEditState();
-    }
-  }
-
-  function addSection(title) {
-    if (title.trim() !== "") {
-      setSections([...sections, { title, sites: [] }]);
       resetModalAndEditState();
     }
   }
