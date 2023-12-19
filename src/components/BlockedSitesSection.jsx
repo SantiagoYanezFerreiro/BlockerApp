@@ -10,15 +10,19 @@ export default function BlockedSitesSection({
   return (
     <div className="blocker-sites-section">
       <h2>{title}</h2>
-      <ul>
-        {sites.map((site, index) => (
-          <li key={index}>
-            {site}
-            <button onClick={() => onEditSite(index)}>Edit</button>
-            <button onClick={() => onDeleteSite(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      {sites.length > 0 ? (
+        <ul>
+          {sites.map((site, index) => (
+            <li key={index}>
+              {site}
+              <button onClick={() => onEditSite(index)}>Edit</button>
+              <button onClick={() => onDeleteSite(index)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No Sites added yet</p>
+      )}
       <button onClick={onAddSite}>Add Website</button>
     </div>
   );

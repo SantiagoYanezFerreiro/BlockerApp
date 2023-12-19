@@ -33,13 +33,13 @@ export default function WebsiteBlocker() {
   }
 
   function openModalToAddNewSection() {
-    isAddingSection(true);
+    setIsAddingSection(true);
     setIsModalOpen(true);
     resetEditStates();
   }
 
   function openModalForEdit(sectionIndex, siteIndex) {
-    isAddingSection(true);
+    setIsAddingSection(false);
     setIsModalOpen(true);
     setEditIndex(siteIndex);
     setCurrentEditSite(sections[sectionIndex].sites[siteIndex]);
@@ -88,6 +88,7 @@ export default function WebsiteBlocker() {
         onClose={resetModalAndEditState}
         onAddOrEditSite={addSiteToSection}
         currentEditSite={currentEditSite}
+        isAddingSection={isAddingSection}
       />
     </div>
   );
