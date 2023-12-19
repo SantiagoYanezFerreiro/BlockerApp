@@ -5,13 +5,16 @@ import AddBlockedSiteModal from "./AddBlockedSiteModal";
 export default function WebsiteBlocker() {
   const [sections, setSections] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddingSection, setIsAddingSection] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   const [currentEditSite, setCurrentEditSite] = useState(null);
   const [currentEditSectionIndex, setCurrentEditSectionIndex] = useState(null);
 
   function addSiteToSection(site) {
-    const updatedSections = [...sections];
-    if (site && currentEditSectionIndex !== null) {
+    if (isAddingSection) {
+      addSection(site);
+    } else if (site && currentEditSectionIndex !== null) {
+      const updatedSections = [...sections];
       if (editIndex !== null) {
         updatedSections[currentEditSectionIndex].sites[editIndex] = site;
       } else {
@@ -22,22 +25,21 @@ export default function WebsiteBlocker() {
     }
   }
 
-  function openModalToAddNewSection() {
-    setIsAddingSection(true);
-    setIsModalOpen(true);
-    // Reset other states
-    setEditIndex(null);
-    setCurrentEditSite(null);
-    setCurrentEditSectionIndex(null);
-  }
-
   function addSection(title) {
     if (title.trim() !== "") {
       setSections([...sections, { title, sites: [] }]);
+      resetModalAndEditState();
     }
   }
 
+  function openModalToAddNewSection() {
+    isAddingSection(true);
+    setIsModalOpen(true);
+    resetEditStates();
+  }
+
   function openModalForEdit(sectionIndex, siteIndex) {
+    isAddingSection(true);
     setIsModalOpen(true);
     setEditIndex(siteIndex);
     setCurrentEditSite(sections[sectionIndex].sites[siteIndex]);
@@ -46,9 +48,14 @@ export default function WebsiteBlocker() {
 
   function resetModalAndEditState() {
     setIsModalOpen(false);
+    resetEditStates();
+  }
+
+  function resetEditStates() {
     setEditIndex(null);
     setCurrentEditSite(null);
     setCurrentEditSectionIndex(null);
+    setIsAddingSection(false);
   }
 
   function deleteSite(sectionIndex, siteIndex) {
@@ -66,6 +73,7 @@ export default function WebsiteBlocker() {
           title={section.title}
           sites={section.sites}
           onAddSite={() => {
+            setIsAddingSection(false);
             setCurrentEditSectionIndex(index);
             setIsModalOpen(true);
           }}
