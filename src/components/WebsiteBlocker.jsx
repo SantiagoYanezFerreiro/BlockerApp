@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlockedSitesSection from "./BlockedSitesSection";
 import AddBlockedSiteModal from "./AddBlockedSiteModal";
 
@@ -11,7 +11,7 @@ export default function WebsiteBlocker() {
   const [currentEditSectionIndex, setCurrentEditSectionIndex] = useState(null);
 
   function addSiteToSection(site) {
-    console.log("functionc called");
+    console.log("function add site called");
     const updatedSections = [...sections];
     if (isAddingSection) {
       if (site.trim() !== "") {
@@ -28,6 +28,10 @@ export default function WebsiteBlocker() {
       resetModalAndEditState();
     }
   }
+
+  useEffect(() => {
+    console.log("Sections updated", sections);
+  }, [sections]);
 
   function openModalToAddNewSection() {
     setIsAddingSection(true);
@@ -52,7 +56,6 @@ export default function WebsiteBlocker() {
     setEditIndex(null);
     setCurrentEditSite(null);
     setCurrentEditSectionIndex(null);
-    setIsAddingSection(false);
   }
 
   function deleteSite(sectionIndex, siteIndex) {
