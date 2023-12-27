@@ -38,6 +38,10 @@ button {
   margin-bottom: 15px;
 }
 
+.addButton {
+  width: 35%;
+}
+
 li {
   list-style: none;
   text-align: center;

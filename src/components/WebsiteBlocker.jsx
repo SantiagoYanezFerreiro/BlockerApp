@@ -81,7 +81,6 @@ export default function WebsiteBlocker() {
           onDeleteSite={(siteIndex) => deleteSite(index, siteIndex)}
         />
       ))}
-      <button onClick={openModalToAddNewSection}>Add New Section</button>
 
       <AddBlockedSiteModal
         isOpen={isModalOpen}
@@ -90,6 +89,8 @@ export default function WebsiteBlocker() {
         currentEditSite={currentEditSite}
         isAddingSection={isAddingSection}
       />
+
+      <button onClick={openModalToAddNewSection}>Add Section</button>
     </div>
   );
 }

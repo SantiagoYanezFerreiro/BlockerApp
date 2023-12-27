@@ -31,8 +31,11 @@ export default function AddBlockedSiteModal({
     <div className={`modal ${isOpen ? "open" : ""}`}>
       <div className="modal-content">
         <input
+          className="addButton"
           type="text"
-          placeholder={isAddingSection ? "Enter Section Title" : "Enter site"}
+          placeholder={
+            isAddingSection ? "Enter Section Title" : "Enter Website"
+          }
           value={inputValue}
           onChange={handleInputChange}
         />
@@ -40,8 +43,8 @@ export default function AddBlockedSiteModal({
           {isAddingSection
             ? "Add Section"
             : currentEditSite
-            ? "Edit Site"
-            : "Add Site"}
+            ? "Edit Website"
+            : "Add Website"}
         </button>
       </div>
     </div>
