@@ -11,9 +11,10 @@ export default function BlockedSitesSection({
   onAddWebsite,
   onEditWebsite,
   onEditSectionTitle,
+  onDeleteSection,
+  onDeleteWebsite,
 }) {
   const [newWebsite, setNewWebsite] = useState("");
-  const [editedTitle, setEditedTitle] = useState(title);
 
   const handleAddWebsite = () => {
     onAddWebsite(newWebsite);
@@ -40,11 +41,13 @@ export default function BlockedSitesSection({
             <button onClick={handleAddWebsite}>Add Website</button>
             <input
               type="text"
-              value={editedTitle}
-              onChange={(e) => setEditedTitle(e.target.value)}
-              placeholder="Edit section title"
+              value={title} // Use title from props directly
+              onChange={(e) => onEditSectionTitle(e.target.value)}
+              placeholder="Enter Section Title"
             />
-            <button onClick={handleEditSectionTitle}>Edit Section Title</button>
+            <button onClick={() => onDeleteSection(index)}>
+              Delete Section
+            </button>
             <button onClick={onCloseModal}>Close</button>
           </div>
         </div>
@@ -61,6 +64,7 @@ export default function BlockedSitesSection({
             >
               Edit
             </button>
+            <button onClick={() => onDeleteWebsite(siteIndex)}>Delete </button>
           </li>
         ))}
       </ul>
@@ -78,4 +82,5 @@ BlockedSitesSection.propTypes = {
   onAddWebsite: PropTypes.func.isRequired,
   onEditWebsite: PropTypes.func.isRequired,
   onEditSectionTitle: PropTypes.func.isRequired,
+  onDeleteSection: PropTypes.func.isRequired,
 };

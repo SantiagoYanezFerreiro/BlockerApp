@@ -27,6 +27,17 @@ export default function WebsiteBlocker() {
     setSections(updatedSections);
   };
 
+  const deleteSection = (index) => {
+    const updatedSections = sections.filter((_, i) => i !== index);
+    setSections(updatedSections);
+  };
+
+  const deleteWebsiteFromSection = (sectionIndex, websiteIndex) => {
+    const updatedSections = [...sections];
+    updatedSections[sectionIndex].sites.splice(websiteIndex, 1);
+    setSections(updatedSections);
+  };
+
   const openModal = (index) => setActiveModalIndex(index);
   const closeModal = () => setActiveModalIndex(null);
 
@@ -47,6 +58,10 @@ export default function WebsiteBlocker() {
             editWebsiteInSection(index, websiteIndex, newWebsite)
           }
           onEditSectionTitle={(newTitle) => editSectionTitle(index, newTitle)}
+          onDeleteSection={() => deleteSection(index)}
+          onDeleteWebsite={(websiteIndex) =>
+            deleteWebsiteFromSection(index, websiteIndex)
+          }
         />
       ))}
       <button onClick={() => addSection(`Section${sections.length + 1}`)}>
