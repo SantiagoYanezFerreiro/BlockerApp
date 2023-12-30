@@ -83,4 +83,5 @@ BlockedSitesSection.propTypes = {
   onEditWebsite: PropTypes.func.isRequired,
   onEditSectionTitle: PropTypes.func.isRequired,
   onDeleteSection: PropTypes.func.isRequired,
+  onDeleteWebsite: PropTypes.func.isRequired,
 };
