@@ -3,21 +3,12 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #ffffff;
+  background-color: #000000;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
@@ -37,11 +28,27 @@ h1 {
 p {
   font-weight: 700;
   font-size: 120%;
+  color: #bdbdbd;
 }
 
 button {
-  margin-bottom: 15px;
-  padding: 10px;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #4caf50; /* Vibrant color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+  transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+button:hover {
+  background-color: #66bb6a; /* Slightly darker shade on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+button:active {
+  background-color: #388e3c; /* Even darker when pressed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow when pressed */
 }
 
 input {
@@ -51,6 +58,15 @@ input {
 li {
   list-style: none;
   text-align: center;
+}
+
+a {
+  font-weight: 500;
+  color: #388e3c;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #388e3c;
 }
 
 .addButton {
