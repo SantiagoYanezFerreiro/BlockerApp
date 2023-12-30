@@ -29,8 +29,8 @@ export default function BlockedSitesSection({
 
       <ul>
         {sites.map((site, siteIndex) => (
-          <li key={siteIndex}>
-            {site}
+          <li key={siteIndex} className="site-item">
+            <p className="site-name">{site}</p>
             <button
               onClick={() =>
                 onEditWebsite(siteIndex, prompt("Edit website", site))
