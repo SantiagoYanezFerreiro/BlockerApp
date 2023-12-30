@@ -43,7 +43,7 @@ export default function WebsiteBlocker() {
 
   return (
     <div className="blocker-container">
-      <h1>Website Blocker</h1>
+      <h1>Blocks</h1>
       {sections.map((section, index) => (
         <BlockedSitesSection
           key={index}

@@ -38,17 +38,24 @@ button {
   margin-bottom: 15px;
 }
 
-.addButton {
-  width: 35%;
-}
-
 li {
   list-style: none;
   text-align: center;
 }
 
+.addButton {
+  width: 35%;
+}
+
+.blocker-container {
+  width: 1000px;
+}
+
 .blocker-sites-section {
-  text-align: center; /* Center-align the section content */
+  text-align: center;
+  border: 2px solid white;
+  margin-bottom: 30px;
+  padding: 15px; /* Center-align the section content */
 }
 
 .blocker-sites-section ul {
@@ -58,4 +65,12 @@ li {
 
 .blocker-sites-section li {
   margin-bottom: 20px;
+}
+
+.section-name {
+  margin-right: 500px;
+}
+
+.add-edit-website {
+  margin: 20px;
 }

@@ -21,37 +21,11 @@ export default function BlockedSitesSection({
     setNewWebsite("");
   };
 
-  const handleEditSectionTitle = () => {
-    onEditSectionTitle(editedTitle);
-  };
-
   return (
     <div className="blocker-sites-section">
-      <h2 onClick={onOpenModal}>{title}</h2>
-
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <input
-              type="text"
-              value={newWebsite}
-              onChange={(e) => setNewWebsite(e.target.value)}
-              placeholder="Enter new website"
-            />
-            <button onClick={handleAddWebsite}>Add Website</button>
-            <input
-              type="text"
-              value={title} // Use title from props directly
-              onChange={(e) => onEditSectionTitle(e.target.value)}
-              placeholder="Enter Section Title"
-            />
-            <button onClick={() => onDeleteSection(index)}>
-              Delete Section
-            </button>
-            <button onClick={onCloseModal}>Close</button>
-          </div>
-        </div>
-      )}
+      <h2 className="section-name" onClick={onOpenModal}>
+        {title}
+      </h2>
 
       <ul>
         {sites.map((site, siteIndex) => (
@@ -68,6 +42,34 @@ export default function BlockedSitesSection({
           </li>
         ))}
       </ul>
+
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content ">
+            <div className="add-edit-website">
+              <input
+                type="text"
+                value={newWebsite}
+                onChange={(e) => setNewWebsite(e.target.value)}
+                placeholder="Enter new website"
+              />
+              <button onClick={handleAddWebsite}>Add Website</button>
+            </div>
+            <div className="add-edit-section">
+              <input
+                type="text"
+                value={title} // Use title from props directly
+                onChange={(e) => onEditSectionTitle(e.target.value)}
+                placeholder="Enter Section Title"
+              />
+              <button onClick={() => onDeleteSection(index)}>
+                Delete Section
+              </button>
+              <button onClick={onCloseModal}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
