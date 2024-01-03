@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlockedSitesSection from "./BlockedSitesSection";
 
 export default function WebsiteBlocker() {
   const [sections, setSections] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(null);
+
+  useEffect(() => {
+    const getAllBlockedSites = () => {
+      return sections.flatMap((section) => section.sites);
+    };
+    const currentHostName = window.location.hostname;
+    const blockedSites = getAllBlockedSites();
+
+    if (blockedSites.includes(currentHostName)) {
+      window.location.href = "www.google.com";
+    }
+  }, [sections]);
 
   const addSection = (title) => {
     setSections([...sections, { title, sites: [] }]);

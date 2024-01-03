@@ -8,10 +8,10 @@ app.use(cors());
 
 app.use((req, res, next) => {
   const blockedSites = ["example.com"];
-  const requestedSite = req.hostname;
+  const requestedSite = req.originalUrl;
 
   if (blockedSites.includes(requestedSite)) {
-    return res.redirect("https://www.your-redirect-page.com");
+    return res.redirect("https://www.google.com");
   }
 
   next();
