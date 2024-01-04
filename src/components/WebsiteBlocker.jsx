@@ -6,13 +6,10 @@ export default function WebsiteBlocker() {
   const [activeModalIndex, setActiveModalIndex] = useState(null);
 
   useEffect(() => {
-    const getAllBlockedSites = () => {
-      return sections.flatMap((section) => section.sites);
-    };
-    const currentHostName = window.location.hostname;
-    const blockedSites = getAllBlockedSites();
+    const blockedSites = sections.flatMap((section) => section.sites);
+    const currentSite = window.location.hostname;
 
-    if (blockedSites.includes(currentHostName)) {
+    if (blockedSites.includes(currentSite)) {
       window.location.href = "www.google.com";
     }
   }, [sections]);
