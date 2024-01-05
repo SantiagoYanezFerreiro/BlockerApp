@@ -7,12 +7,9 @@ export default function WebsiteBlocker() {
 
   useEffect(() => {
     const blockedSites = sections.flatMap((section) => section.sites);
-    const currentSite = window.location.hostname;
-
-    if (blockedSites.includes(currentSite)) {
-      window.location.href = "www.google.com";
-    }
-  }, [sections]);
+    // Assuming you're using Chrome storage sync
+    chrome.storage.sync.set({ blockedSites: blockedSites });
+  }, [sections]); // Run this effect when 'sections' changes
 
   const addSection = (title) => {
     setSections([...sections, { title, sites: [] }]);
